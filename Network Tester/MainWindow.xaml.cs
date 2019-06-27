@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Network_Tester
 {
@@ -24,5 +26,25 @@ namespace Network_Tester
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            textBlock.Text += "Checking IP addresses! /n";
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    textBlock.Text = ip.ToString();
+                }
+            }
+            //throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
