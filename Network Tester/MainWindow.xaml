@@ -7,12 +7,15 @@
         mc:Ignorable="d"
         Title="Network Tester" Height="450" Width="800">
     <Grid>
-        <Button Name="btn1" Content="RUN" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="145" Height="67" Click="Button_Click" ClickMode="Press">
+        <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="145" Height="67" Click="Button_Click" ClickMode="Press">
         </Button>
         <Menu HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="150">
-            <MenuItem Name="iPcheck" Header="IP Check" Height="40" Width="140" Click="MenuItem_Click"/>
+            <ListBox>
+			<ListBoxItem>IP Check</ListBoxItem>
+			<ListBoxItem>Connection to internet test</ListBoxItem>
+			<ListBoxItem>Placeholder</ListBoxItem>
+			</ListBox>
         </Menu>
         <TextBlock Name="textBlock" HorizontalAlignment="Left" Height="328" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="619"/>
-
     </Grid>
 </Window>

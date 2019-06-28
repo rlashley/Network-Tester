@@ -27,20 +27,33 @@ namespace Network_Tester
             InitializeComponent();
         }
 
+        //Method for button click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            textBlock.Text += "Checking IP addresses! /n";
+			if(textBlock.SelectedIndex == 1){
+				textBlock.Text += ipCheck();
+			}
+			if(textBlock.SelectedIndex == 2){
+				
+			}		
+        }
+		
+        //Method that checks IP address on local machine
+		private string ipCheck(){
+			string response="";
+			textBlock.Text += "Checking IP addresses! /n";
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    textBlock.Text = ip.ToString();
+					response = ip.ToString();
                 }
             }
-            //throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
+			return response;
+		}
 
+        //Methods for any event on click items in list.
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
