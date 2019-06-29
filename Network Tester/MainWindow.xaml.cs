@@ -30,18 +30,16 @@ namespace Network_Tester
         //Method for button click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-			if(textBlock.SelectedIndex == 1){
-				textBlock.Text += ipCheck();
-			}
-			if(textBlock.SelectedIndex == 2){
-				
-			}		
+            if (listBox1.SelectedIndex.Equals(0))
+            {
+                ipCheck();
+            }
         }
 		
         //Method that checks IP address on local machine
-		private string ipCheck(){
+		private void ipCheck(){
 			string response="";
-			textBlock.Text += "Checking IP addresses! /n";
+			textBlock.Text = "Checking IP addresses... ";
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
@@ -50,14 +48,13 @@ namespace Network_Tester
 					response = ip.ToString();
                 }
             }
-			return response;
+			textBlock.Text+="Your local IP is : " +response;
 		}
 
         //Methods for any event on click items in list.
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
 
         }
-
     }
 }
