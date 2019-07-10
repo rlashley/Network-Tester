@@ -9,12 +9,15 @@
     <Grid>
         <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="145" Height="67" Click="Button_Click" ClickMode="Press">
         </Button>
+        <Button Name="clear" Content="CLEAR" HorizontalAlignment="Left" Margin="339,343,0,0" VerticalAlignment="Top" Width="145" Height="67" Click="ClearButton_Click" ClickMode="Press">
+        </Button>
         <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,655.6,10">
             <ListBoxItem Content="IPCheck"></ListBoxItem>
+            <ListBoxItem Content="Generate MD5 Hash"></ListBoxItem>
             <ListBoxItem Content="Net Security Test"></ListBoxItem>
             <ListBoxItem Content="Access to Internet?"></ListBoxItem>
             <ListBoxItem Content="Ports Open"></ListBoxItem>
-            <ListBoxItem Content=""></ListBoxItem>
+            <ListBoxItem Content="Daisy Button"></ListBoxItem>
             <ListBoxItem Content=""></ListBoxItem>
         </ListBox>
         <TextBlock Name="textBlock" HorizontalAlignment="Left" Height="328" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="619"/>
