@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Network_Tester
 {
@@ -27,6 +28,7 @@ namespace Network_Tester
         public MainWindow()
         {
             InitializeComponent();
+            ProgressBar ProgBar = new ProgressBar();
         }
 
         //Button click event, different methods triggered by selected item in the menu
@@ -73,16 +75,28 @@ namespace Network_Tester
         }
 
         private List<int> PortOpen(){
+
             List<int> listOfPorts = new List<int>();
-            TcpClient tcpClient = new TcpClient();
-            for(int i=0;i<30;i++)
+            //Assign localhost ip address to ipa
+            IPAddress ipa = Dns.GetHostAddresses("localhost")[1];
+
+            //Loop through ports below. In future, change i to variable and query user for port range
+            for(int i=1;i<10;i++)
             {
-                try{
-                tcpClient.Connect("127.0.0.1", i);
-                listOfPorts.Add(i);
+                try
+                {
+                 //Create new socket and connect to ip address and socket
+                Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                sock.Connect(ipa, i);
+                if (sock.Connected)
+                    listOfPorts.Add(i);
+                sock.Close();     
                 }
-                catch (Exception){
+                catch (SocketException ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
+                ProgBar.Value++;
             }
             return listOfPorts;
         }
@@ -90,7 +104,7 @@ namespace Network_Tester
         //Method that checks IP address on local machine
 		private void IpCheck(){
 			string response="";
-			textBlock.Text = "Checking IP addresses... ";
+			textBlock.Text = "Checking IP addresses... \n";
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
@@ -99,6 +113,7 @@ namespace Network_Tester
 					response = ip.ToString();
                 }
             }
+            textBlock.Text+="Your local Host Name is "+host.HostName+"\n";
 			textBlock.Text+="Your local IP is : " +response;
 		}
 

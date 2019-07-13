@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="Network Tester" Height="450" Width="800">
     <Grid>
-        <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="145" Height="67" Click="Button_Click" ClickMode="Press">
+        <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="140" Height="65" Click="Button_Click" ClickMode="Press">
         </Button>
-        <Button Name="clear" Content="CLEAR" HorizontalAlignment="Left" Margin="339,343,0,0" VerticalAlignment="Top" Width="145" Height="67" Click="ClearButton_Click" ClickMode="Press">
+        <Button Name="clear" Content="CLEAR" HorizontalAlignment="Left" Margin="400,343,0,0" VerticalAlignment="Top" Width="140" Height="65" Click="ClearButton_Click" ClickMode="Press">
         </Button>
-        <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,655.6,10">
+        <ProgressBar Name="ProgBar" Minimum="0" Maximum="100" Value="10" HorizontalAlignment="Left" Margin="150,343,0,0" VerticalAlignment="Top" Width="200" Height="65"></ProgressBar>
+        <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,655,10">
             <ListBoxItem Content="IPCheck"></ListBoxItem>
-            <ListBoxItem Content="Generate MD5 Hash"></ListBoxItem>
+            <ListBoxItem Content="Create MD5 Hash"></ListBoxItem>
             <ListBoxItem Content="Net Security Test"></ListBoxItem>
             <ListBoxItem Content="Access to Internet?"></ListBoxItem>
             <ListBoxItem Content="Ports Open"></ListBoxItem>
