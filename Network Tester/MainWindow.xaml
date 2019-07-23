@@ -7,20 +7,26 @@
         mc:Ignorable="d"
         Title="Network Tester" Height="450" Width="800">
     <Grid>
-        <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="140" Height="65" Click="Button_Click" ClickMode="Press">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="697,380,0,0" VerticalAlignment="Top" Width="85" Height="28" Click="Button_Click" ClickMode="Press" Grid.ColumnSpan="2">
         </Button>
-        <Button Name="clear" Content="CLEAR" HorizontalAlignment="Left" Margin="400,343,0,0" VerticalAlignment="Top" Width="140" Height="65" Click="ClearButton_Click" ClickMode="Press">
+        <Button Name="clear" Content="CLEAR" HorizontalAlignment="Left" Margin="602,380,0,0" VerticalAlignment="Top" Width="85" Height="28" Click="ClearButton_Click" ClickMode="Press" Grid.ColumnSpan="2">
         </Button>
-        <ProgressBar Name="ProgBar" Minimum="0" Maximum="100" Value="10" HorizontalAlignment="Left" Margin="150,343,0,0" VerticalAlignment="Top" Width="200" Height="65"></ProgressBar>
-        <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,655,10">
+        <ProgressBar Name="ProgBar" Minimum="0" Maximum="100" Value="10" HorizontalAlignment="Left" Margin="165,380,0,0" VerticalAlignment="Top" Width="155" Height="28" Grid.ColumnSpan="2"></ProgressBar>
+        <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,632,10" Grid.ColumnSpan="2">
             <ListBoxItem Content="IPCheck"></ListBoxItem>
             <ListBoxItem Content="Create MD5 Hash"></ListBoxItem>
             <ListBoxItem Content="Net Security Test"></ListBoxItem>
             <ListBoxItem Content="Access to Internet?"></ListBoxItem>
-            <ListBoxItem Content="Ports Open"></ListBoxItem>
+            <ListBoxItem Content="Server Connect"></ListBoxItem>
             <ListBoxItem Content="Daisy Button"></ListBoxItem>
             <ListBoxItem Content=""></ListBoxItem>
         </ListBox>
-        <TextBlock Name="textBlock" HorizontalAlignment="Left" Height="328" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="619"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="306" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="inputBox" TextWrapping="Wrap" MaxLength="100" Text="Enter text here" Margin="165,321,195,44" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="password" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="602,321,0,44" Width="180"/>
     </Grid>
 </Window>

@@ -5,15 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Threading;
 
 namespace Network_Tester
@@ -23,7 +18,7 @@ namespace Network_Tester
     /// </summary>
     public partial class MainWindow : Window
     {
-        protected string code="";
+        private string code="";
 
         public MainWindow()
         {
@@ -41,16 +36,23 @@ namespace Network_Tester
 
             if (listBox1.SelectedIndex.Equals(1))
             {
-                GenHash(code);
+                if (!inputBox.Text.Equals(""))
+                {
+                    string pass = password.Password;
+                    code = inputBox.Text;
+                    textBlock.Text=GenHash(code,pass);
+                }
+                else
+                    textBlock.Text="The text box is empty. Please enter the information you would like to be encrypted.";
             }
 
             if (listBox1.SelectedIndex.Equals(4))
             {
                 List<int> openPorts = new List<int>();
-                openPorts = PortOpen();
+                openPorts = ServerConnect();
                 foreach(int port in openPorts)
                 {
-                textBlock.Text += port +" is open\n";
+                    textBlock.Text += "\nConnection has been made on port "+port+"\n";
                 }
             }
 
@@ -64,39 +66,68 @@ namespace Network_Tester
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             textBlock.Text="";
+            inputBox.Text="";
         }
 
         //Method that generates a hash using SHA256
-        private string GenHash(string cde){
-            textBlock.Text="Initializing Code Beep boop bop, serializing input to 256bit encrypted hash";
+        private string GenHash(string cde, string Password){
+            textBlock.Text="Initializing Code, serializing input to 256bit encrypted hash.";
             //Place body of serializing code
-            string hash = "Initializing";
-            return hash;
+
+            string Salt = "FairyUnicornPrincess";
+            string HashAlgorithm = "SHA1";
+            int PasswordIterations = 2;
+            string InitialVector = "OFRna73m*aze01xY";
+            int KeySize = 256;
+
+            byte[] InitialVectorBytes = Encoding.ASCII.GetBytes(InitialVector);
+            byte[] SaltValueBytes = Encoding.ASCII.GetBytes(Salt);
+            byte[] PlainTextBytes = Encoding.UTF8.GetBytes(cde);
+            PasswordDeriveBytes DerivedPassword = new PasswordDeriveBytes(Password, SaltValueBytes, HashAlgorithm, PasswordIterations);
+            byte[] KeyBytes = DerivedPassword.GetBytes(KeySize / 8);
+            RijndaelManaged SymmetricKey = new RijndaelManaged();
+            SymmetricKey.Mode = CipherMode.CBC;
+            byte[] CipherTextBytes = null;
+            ICryptoTransform Encryptor = SymmetricKey.CreateEncryptor(KeyBytes, InitialVectorBytes);
+            
+            MemoryStream MemStream = new MemoryStream();
+                
+            CryptoStream CryptoStream = new CryptoStream(MemStream, Encryptor, CryptoStreamMode.Write);
+                    
+            CryptoStream.Write(PlainTextBytes, 0, PlainTextBytes.Length);
+            CryptoStream.FlushFinalBlock();
+            CipherTextBytes = MemStream.ToArray();
+            MemStream.Close();
+            CryptoStream.Close();            
+            SymmetricKey.Clear();
+
+        return Convert.ToBase64String(CipherTextBytes);
         }
 
-        private List<int> PortOpen(){
+        private List<int> ServerConnect(){
 
             List<int> listOfPorts = new List<int>();
+            int port = 10;
+            TcpListener server = null;
+
             //Assign localhost ip address to ipa
             IPAddress ipa = Dns.GetHostAddresses("localhost")[1];
-
-            //Loop through ports below. In future, change i to variable and query user for port range
-            for(int i=1;i<10;i++)
+            try
             {
-                try
-                {
-                 //Create new socket and connect to ip address and socket
-                Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                sock.Connect(ipa, i);
-                if (sock.Connected)
-                    listOfPorts.Add(i);
-                sock.Close();     
-                }
-                catch (SocketException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                ProgBar.Value++;
+
+                server = new TcpListener(ipa, 10);
+                server.Start();
+                textBlock.Text += "\nConnection to server started...\n";
+
+                TcpClient client = new TcpClient("localhost", port);
+                listOfPorts.Add(port);
+                client.Close();
+                server.Stop();
+            
+            }
+            catch (SocketException e) 
+            {
+                MessageBox.Show(e.Message);
             }
             return listOfPorts;
         }
