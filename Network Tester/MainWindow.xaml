@@ -23,10 +23,9 @@
             <ListBoxItem Content="Access to Internet?"></ListBoxItem>
             <ListBoxItem Content="Server Connect"></ListBoxItem>
             <ListBoxItem Content="Daisy Button"></ListBoxItem>
-            <ListBoxItem Content=""></ListBoxItem>
         </ListBox>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="306" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="inputBox" TextWrapping="Wrap" MaxLength="100" Text="Enter text here" Margin="165,321,195,44" Grid.ColumnSpan="2"/>
-        <PasswordBox x:Name="password" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="602,321,0,44" Width="180"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="303" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="inputBox" TextWrapping="Wrap" MaxLength="100" Margin="165,334,195,44" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="password" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="602,334,0,44" Width="180"/>
     </Grid>
 </Window>
