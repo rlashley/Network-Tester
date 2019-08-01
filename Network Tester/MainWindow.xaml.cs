@@ -39,10 +39,10 @@ namespace Network_Tester
             {
                 if (!inputBox.Text.Equals(""))
                 {
-                    Addtext("Initializing Code, serializing input to 256bit encrypted hash.");
+                    viewModel.Textblock ="Initializing Code, serializing input to 256bit encrypted hash.";
                     string pass = password.Password;
                     code = inputBox.Text;
-                    textBlock.Text = buttonFunctions.GenHash(code, pass);
+                    viewModel.Textblock = buttonFunctions.GenHash(code, pass);
                 }
                 else
                     Addtext("The text box is empty. Please enter the information you would like to be encrypted.");
@@ -55,7 +55,7 @@ namespace Network_Tester
                 openPorts = buttonFunctions.ServerConnect();
                 foreach (int port in openPorts)
                 {
-                    Addtext("Connection has been made on port " + port);
+                    viewModel.Textblock ="Connection has been made on port " + port";
                 }
             }
 
