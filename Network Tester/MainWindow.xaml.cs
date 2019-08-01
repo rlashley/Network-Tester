@@ -14,18 +14,14 @@ namespace Network_Tester
     {
         private string code = "";
         ButtonFunctions buttonFunctions = new ButtonFunctions();
-        public static MainWindow AppWindow;
-
+          
         public MainWindow()
         {
+            var viewModel = new ViewModel();
             InitializeComponent();
             ProgressBar ProgBar = new ProgressBar();
-            AppWindow = this;
         }
-        public void Addtext(string t)
-        {
-            textBlock.Text += (t+"\n");
-        }
+        
 
         //Button click event, different methods triggered by selected item in the menu
         private void Button_Click(object sender, RoutedEventArgs e)
