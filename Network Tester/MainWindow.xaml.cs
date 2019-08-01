@@ -18,6 +18,7 @@ namespace Network_Tester
         public MainWindow()
         {
             var viewModel = new ViewModel();
+            DataContext = viewModel;
             InitializeComponent();
             ProgressBar ProgBar = new ProgressBar();
         }
