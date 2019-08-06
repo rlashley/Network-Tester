@@ -14,11 +14,11 @@ namespace Network_Tester
     {
         private string code = "";
         ButtonFunctions buttonFunctions = new ButtonFunctions();
+        ViewModel viewModel = new ViewModel();
           
         public MainWindow()
         {
-            var viewModel = new ViewModel();
-            DataContext = viewModel;
+            this.DataContext = viewModel;
             InitializeComponent();
             ProgressBar ProgBar = new ProgressBar();
         }
