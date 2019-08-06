@@ -15,7 +15,6 @@ namespace Network_Tester
     class ButtonFunctions
     {
 
-
         public ButtonFunctions()
         {
             
@@ -34,7 +33,7 @@ namespace Network_Tester
             byte[] encrypted = EncryptStringToBytes(cde, SymmetricKey.Key, SymmetricKey.IV);
 
             //Return the encrypted data
-            MainWindow.AppWindow.Addtext(cde);
+            viewModel.Textblock(cde);
             return Encoding.Default.GetString(encrypted);
         }
 
@@ -74,7 +73,7 @@ namespace Network_Tester
         public void IpCheck()
         {
             string response = "";
-            MainWindow.AppWindow.Addtext("Checking IP addresses...");
+            viewModel.Textblock("Checking IP addresses...");
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
@@ -83,8 +82,8 @@ namespace Network_Tester
                     response = ip.ToString();
                 }
             }
-            MainWindow.AppWindow.Addtext("Your local Host Name is " + host.HostName);
-            MainWindow.AppWindow.Addtext("Your local IP is : " + response);
+            viewModel.Textblock("Your local Host Name is " + host.HostName);
+            viewModel.Textblock("Your local IP is : " + response);
         }
 
         public List<int> ServerConnect()
@@ -101,7 +100,7 @@ namespace Network_Tester
 
                 server = new TcpListener(ipa, 10);
                 server.Start();
-                MainWindow.AppWindow.Addtext("Connection to server started...");
+                viewModel.Textblock("Connection to server started...");
 
                 TcpClient client = new TcpClient("localhost", port);
                 listOfPorts.Add(port);
@@ -111,7 +110,7 @@ namespace Network_Tester
             }
             catch (SocketException e)
             {
-                MainWindow.AppWindow.Addtext(e.Message);
+                viewModel.Textblock(e.Message);
             }
             return listOfPorts;
         }
