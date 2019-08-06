@@ -6,6 +6,6 @@ namespace Network_Tester
 {
   public class ViewModel
   {		
-      public string TextBlock { get;set;}
+      public string Textblock { get; set; }
   } 
 }
