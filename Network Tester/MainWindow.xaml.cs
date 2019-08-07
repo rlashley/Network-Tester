@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace Network_Tester
 {
@@ -15,19 +13,17 @@ namespace Network_Tester
         private string code = "";
         ButtonFunctions buttonFunctions = new ButtonFunctions();
         ViewModel viewModel = new ViewModel();
-          
+
         public MainWindow()
         {
             this.DataContext = viewModel;
             InitializeComponent();
             ProgressBar ProgBar = new ProgressBar();
         }
-        
 
         //Button click event, different methods triggered by selected item in the menu
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             //IP Check function
             if (listBox1.SelectedIndex.Equals(0))
             {
@@ -39,13 +35,13 @@ namespace Network_Tester
             {
                 if (!inputBox.Text.Equals(""))
                 {
-                    viewModel.Textblock ="Initializing Code, serializing input to 256bit encrypted hash.";
+                    viewModel.Textblock = "Initializing Code, serializing input to 256bit encrypted hash.";
                     string pass = password.Password;
                     code = inputBox.Text;
                     viewModel.Textblock = buttonFunctions.GenHash(code, pass);
                 }
                 else
-                    Addtext("The text box is empty. Please enter the information you would like to be encrypted.");
+                    viewModel.Textblock = "The text box is empty. Please enter the information you would like to be encrypted.";
             }
 
             //Server connection function
@@ -55,14 +51,14 @@ namespace Network_Tester
                 openPorts = buttonFunctions.ServerConnect();
                 foreach (int port in openPorts)
                 {
-                    viewModel.Textblock ="Connection has been made on port " + port";
+                    viewModel.Textblock = "Connection has been made on port " + port;
                 }
             }
 
             //Daisy button(Place holder for now, future features will go here)
             if (listBox1.SelectedIndex.Equals(5))
             {
-                Addtext("Hi Wifey! Just adding placeholders to the program.");
+                viewModel.Textblock = "Hi Wifey! Just adding placeholders to the program.";
             }
         }
 
@@ -77,7 +73,6 @@ namespace Network_Tester
         //Methods for any event on click items in list.
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

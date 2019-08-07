@@ -8,8 +8,8 @@
         Title="Network Tester" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0*" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Button Name="runBtn" Content="RUN" HorizontalAlignment="Left" Margin="697,380,0,0" VerticalAlignment="Top" Width="85" Height="28" Click="Button_Click" ClickMode="Press" Grid.ColumnSpan="2">
         </Button>
@@ -24,8 +24,8 @@
             <ListBoxItem Content="Server Connect"></ListBoxItem>
             <ListBoxItem Content="Daisy Button"></ListBoxItem>
         </ListBox>
-        <TextBlock x:Name="textBlock" Text="{Binding Textblock, Mode=TwoWay}" HorizontalAlignment="Left" Height="303" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="inputBox" Text="{Binding InputBox, Mode=TwoWay}" TextWrapping="Wrap" MaxLength="100" Margin="165,334,195,44" Grid.ColumnSpan="2"/>
-        <PasswordBox x:Name="password" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="602,334,0,44" Width="180"/>
+        <TextBlock x:Name="textBlock" Text="{Binding Textblock, Mode=TwoWay}" HorizontalAlignment="Left" Height="303" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" Grid.ColumnSpan="2" />
+        <TextBox x:Name="inputBox" Text="{Binding InputBox, Mode=TwoWay}" TextWrapping="Wrap" MaxLength="100" Margin="165,334,195,44" Grid.ColumnSpan="2" />
+        <PasswordBox x:Name="password" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="602,334,0,44" Width="180" />
     </Grid>
 </Window>
