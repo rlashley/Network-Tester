@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace Network_Tester
 {
@@ -14,11 +15,10 @@ namespace Network_Tester
     {
         private string code = "";
         ButtonFunctions buttonFunctions = new ButtonFunctions();
-        ViewModel viewModel = new ViewModel();
           
         public MainWindow()
         {
-            this.DataContext = viewModel;
+            DataContext = new DataBinder();
             InitializeComponent();
             ProgressBar ProgBar = new ProgressBar();
         }
@@ -78,6 +78,26 @@ namespace Network_Tester
         private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
         {
 
+        }
+    }
+    
+    public class DataBinder : INotifyPropertyChanged
+    {
+        string _textBlock = "Empty";
+ 
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        private void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+        public string Textblock
+        {
+            get { return _textBlock; }
+            set { _textBlock = value; 
+            OnPropertyChanged("Textblock");
+            }
         }
     }
 }
