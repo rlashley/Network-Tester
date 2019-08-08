@@ -15,10 +15,11 @@ namespace Network_Tester
     {
         private string code = "";
         ButtonFunctions buttonFunctions = new ButtonFunctions();
+        DataBinder data = new DataBinder();
           
         public MainWindow()
         {
-            DataContext = new DataBinder();
+            DataContext = data;
             InitializeComponent();
             ProgressBar ProgBar = new ProgressBar();
         }
@@ -31,7 +32,11 @@ namespace Network_Tester
             //IP Check function
             if (listBox1.SelectedIndex.Equals(0))
             {
-                buttonFunctions.IpCheck();
+                data.Textblock="Checking IP addresses...";
+                foreach(string s in buttonFunctions.IpCheck())
+                {
+                    data.Textblock = s;
+                }
             }
 
             //Generate encrypted hash function
@@ -39,13 +44,13 @@ namespace Network_Tester
             {
                 if (!inputBox.Text.Equals(""))
                 {
-                    viewModel.Textblock ="Initializing Code, serializing input to 256bit encrypted hash.";
+                    data.Textblock ="Initializing Code, serializing input to 256bit encrypted hash.";
                     string pass = password.Password;
                     code = inputBox.Text;
-                    viewModel.Textblock = buttonFunctions.GenHash(code, pass);
+                    data.Textblock = buttonFunctions.GenHash(code, pass);
                 }
                 else
-                    Addtext("The text box is empty. Please enter the information you would like to be encrypted.");
+                    data.Textblock = "The text box is empty. Please enter the information you would like to be encrypted.";
             }
 
             //Server connection function
@@ -55,14 +60,14 @@ namespace Network_Tester
                 openPorts = buttonFunctions.ServerConnect();
                 foreach (int port in openPorts)
                 {
-                    viewModel.Textblock ="Connection has been made on port " + port";
+                    data.Textblock = "Connection has been made on port " + port;
                 }
             }
 
             //Daisy button(Place holder for now, future features will go here)
             if (listBox1.SelectedIndex.Equals(5))
             {
-                Addtext("Hi Wifey! Just adding placeholders to the program.");
+                data.Textblock = "Hi Wifey! Just adding placeholders to the program.";
             }
         }
 
@@ -83,7 +88,8 @@ namespace Network_Tester
     
     public class DataBinder : INotifyPropertyChanged
     {
-        string _textBlock = "Empty";
+        private string _textBlock = "";
+        private string _inputBox = "";
  
         public event PropertyChangedEventHandler PropertyChanged;
         
@@ -95,8 +101,17 @@ namespace Network_Tester
         public string Textblock
         {
             get { return _textBlock; }
-            set { _textBlock = value; 
+            set { _textBlock += value; 
             OnPropertyChanged("Textblock");
+            }
+        }
+        public string Inputbox
+        {
+            get { return _inputBox; }
+            set
+            {
+                _inputBox = value;
+                OnPropertyChanged("Inputbox");
             }
         }
     }
