@@ -12,7 +12,6 @@
                 <ResourceDictionary Source="Themes\ShinyRed.xaml" />
                 <ResourceDictionary Source="Themes\WhistlerBlue.xaml" />
                 -->
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries></ResourceDictionary>
     </Application.Resources>
 </Application>

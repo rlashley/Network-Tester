@@ -1,22 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography;
-using System.Text;
-using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
 
 namespace Network_Tester
 {
     class ButtonFunctions
     {
+
         public ButtonFunctions()
         {
+            
         }
 
         //Method that generates a hash using SHA256
         public string GenHash(string cde, string Password)
         {
+
             //Place body of serializing code
             RijndaelManaged SymmetricKey = new RijndaelManaged();
             SymmetricKey.GenerateKey();
@@ -26,11 +33,11 @@ namespace Network_Tester
             byte[] encrypted = EncryptStringToBytes(cde, SymmetricKey.Key, SymmetricKey.IV);
 
             //Return the encrypted data
-            viewModel.Textblock = cde;
+            viewModel.Textblock(cde);
             return Encoding.Default.GetString(encrypted);
         }
 
-        private static byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
+        static byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
         {
             byte[] encrypted;
             // Create an RijndaelManaged object
@@ -50,6 +57,7 @@ namespace Network_Tester
                     {
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
+
                             //Write all data to the stream.
                             swEncrypt.Write(plainText);
                         }
@@ -65,7 +73,7 @@ namespace Network_Tester
         public void IpCheck()
         {
             string response = "";
-            viewModel.Textblock = "Checking IP addresses...";
+            viewModel.Textblock("Checking IP addresses...");
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
@@ -74,12 +82,13 @@ namespace Network_Tester
                     response = ip.ToString();
                 }
             }
-            viewModel.Textblock = "Your local Host Name is " + host.HostName;
-            viewModel.Textblock = "Your local IP is : " + response;
+            viewModel.Textblock("Your local Host Name is " + host.HostName);
+            viewModel.Textblock("Your local IP is : " + response);
         }
 
         public List<int> ServerConnect()
         {
+
             List<int> listOfPorts = new List<int>();
             int port = 10;
             TcpListener server = null;
@@ -88,41 +97,23 @@ namespace Network_Tester
             IPAddress ipa = Dns.GetHostAddresses("localhost")[1];
             try
             {
+
                 server = new TcpListener(ipa, 10);
                 server.Start();
-                viewModel.Textblock = "Connection to server started...";
+                viewModel.Textblock("Connection to server started...");
 
                 TcpClient client = new TcpClient("localhost", port);
                 listOfPorts.Add(port);
                 client.Close();
                 server.Stop();
+
             }
             catch (SocketException e)
             {
-                MessageBox.Show(e.Message);
+                viewModel.Textblock(e.Message);
             }
             return listOfPorts;
         }
-    }
-    class ViewModel : INotifyPropertyChanged
-    {
-        private string textValue;
 
-        public string Textblock{
-            get { return textValue; }
-            set 
-            {   
-                textValue = value;
-                OnPropertyChanged("Textblock");
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));      
-        }
     }
 }
