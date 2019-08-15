@@ -15,14 +15,14 @@
         </Button>
         <Button Name="clear" Content="CLEAR" HorizontalAlignment="Left" Margin="602,380,0,0" VerticalAlignment="Top" Width="85" Height="28" Click="ClearButton_Click" ClickMode="Press" Grid.ColumnSpan="2">
         </Button>
-        <ProgressBar Name="ProgBar" Minimum="0" Maximum="100" Value="10" HorizontalAlignment="Left" Margin="165,380,0,0" VerticalAlignment="Top" Width="155" Height="28" Grid.ColumnSpan="2"></ProgressBar>
+        <ProgressBar Name="ProgBar" Minimum="0" Maximum="100" Value="0" HorizontalAlignment="Left" Margin="165,380,0,0" VerticalAlignment="Top" Width="155" Height="28" Grid.ColumnSpan="2"></ProgressBar>
         <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,632,10" Grid.ColumnSpan="2">
             <ListBoxItem Content="IPCheck"></ListBoxItem>
             <ListBoxItem Content="Create MD5 Hash"></ListBoxItem>
             <ListBoxItem Content="Net Security Test"></ListBoxItem>
             <ListBoxItem Content="Access to Internet?"></ListBoxItem>
             <ListBoxItem Content="Server Connect"></ListBoxItem>
-            <ListBoxItem Content="Daisy Button"></ListBoxItem>
+            <ListBoxItem Content="Progress Bar Button"></ListBoxItem>
         </ListBox>
         <TextBlock x:Name="textBlock" Text="{Binding Path=Textblock}" HorizontalAlignment="Left" Height="303" Margin="165,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="614" Grid.ColumnSpan="2"/>
         <TextBox x:Name="inputBox" Text="{Binding Path=Inputbox}" TextWrapping="Wrap" MaxLength="100" Margin="165,334,195,44" Grid.ColumnSpan="2"/>
