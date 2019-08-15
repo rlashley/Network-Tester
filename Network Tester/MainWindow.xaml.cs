@@ -22,7 +22,7 @@ namespace Network_Tester
         {
             DataContext = data;
             InitializeComponent();
-            ProgressBar ProgBar = new ProgressBar();
+            ProgBar.Visibility = Visibility.Collapsed;
         }
         
 
@@ -33,12 +33,15 @@ namespace Network_Tester
             //IP Check function
             if (listBox1.SelectedIndex.Equals(0))
             {
+                ProgBar.Visibility = Visibility.Visible;
                 ProgBar.IsIndeterminate = true;
                 data.Textblock="Checking IP addresses...";
                 foreach(string s in buttonFunctions.IpCheck())
                 {
                     data.Textblock = s;
                 }
+                ProgBar.IsIndeterminate = false;
+                ProgBar.Visibility = Visibility.Collapsed;
             }
 
             //Generate encrypted hash function
@@ -46,11 +49,14 @@ namespace Network_Tester
             {
                 if (!inputBox.Text.Equals(""))
                 {
+                    ProgBar.Visibility = Visibility.Visible;
                     ProgBar.IsIndeterminate = true;
                     data.Textblock ="Initializing Code, serializing input to 256bit encrypted hash.";
                     string pass = password.Password;
                     code = inputBox.Text;
                     data.Textblock = buttonFunctions.GenHash(code, pass);
+                    ProgBar.IsIndeterminate = false;
+                    ProgBar.Visibility = Visibility.Collapsed;
                 }
                 else
                     data.Textblock = "The text box is empty. Please enter the information you would like to be encrypted.";
@@ -59,6 +65,7 @@ namespace Network_Tester
             //Server connection function
             if (listBox1.SelectedIndex.Equals(4))
             {
+                ProgBar.Visibility = Visibility.Visible;
                 ProgBar.IsIndeterminate = true;
                 List<int> openPorts = new List<int>();
                 openPorts = buttonFunctions.ServerConnect();
@@ -66,6 +73,8 @@ namespace Network_Tester
                 {
                     data.Textblock = "Connection has been made on port " + port;
                 }
+                ProgBar.IsIndeterminate = false;
+                ProgBar.Visibility = Visibility.Collapsed;
             }
 
             //Progress Bar button(Place holder for now, future features will go here)
