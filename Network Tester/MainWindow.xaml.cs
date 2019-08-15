@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Network_Tester
 {
@@ -32,6 +33,7 @@ namespace Network_Tester
             //IP Check function
             if (listBox1.SelectedIndex.Equals(0))
             {
+                ProgBar.IsIndeterminate = true;
                 data.Textblock="Checking IP addresses...";
                 foreach(string s in buttonFunctions.IpCheck())
                 {
@@ -44,6 +46,7 @@ namespace Network_Tester
             {
                 if (!inputBox.Text.Equals(""))
                 {
+                    ProgBar.IsIndeterminate = true;
                     data.Textblock ="Initializing Code, serializing input to 256bit encrypted hash.";
                     string pass = password.Password;
                     code = inputBox.Text;
@@ -56,6 +59,7 @@ namespace Network_Tester
             //Server connection function
             if (listBox1.SelectedIndex.Equals(4))
             {
+                ProgBar.IsIndeterminate = true;
                 List<int> openPorts = new List<int>();
                 openPorts = buttonFunctions.ServerConnect();
                 foreach (int port in openPorts)
@@ -64,12 +68,31 @@ namespace Network_Tester
                 }
             }
 
-            //Daisy button(Place holder for now, future features will go here)
+            //Progress Bar button(Place holder for now, future features will go here)
             if (listBox1.SelectedIndex.Equals(5))
             {
-                data.Textblock = "Hi Wifey! Just adding placeholders to the program.";
+                data.Textblock = "Executing Progress Bar Check.";
+                data.Textblock = "Starting long Task...";  
+  
+                Thread.Sleep(1000);  
+  
+                data.Textblock = "In Progress...";  
+  
+                ProgBar.Value = 0;  
+  
+                Task.Run(() =>  
+                {  
+                    for (int i = 0; i < 100; i++)  
+                    {  
+                        Thread.Sleep(50);  
+                        this.Dispatcher.Invoke(() => //Use Dispather to Update UI Immediately  
+                        {  
+                            ProgBar.Value = i;
+                        });  
+                    }  
+                });  
             }
-        }
+        
 
         //Button to clear out text box
         private void ClearButton_Click(object sender, RoutedEventArgs e)
