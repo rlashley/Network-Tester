@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Collections;
 
 namespace Network_Tester
 {
@@ -36,7 +37,9 @@ namespace Network_Tester
 
                 //ProgBar.IsIndeterminate = true;
                 data.Textblock = "Checking IP addresses...\n";
-                foreach (string s in buttonFunctions.IpCheck())
+                String[] ipInfo = new string[2];
+                ipInfo = buttonFunctions.IpCheck();
+                foreach (string s in ipInfo)
                 {
                     data.Textblock = s+"\n";
                 }
@@ -62,7 +65,7 @@ namespace Network_Tester
                     data.Textblock = "The text box is empty. Please enter the information you would like to be encrypted.\n";
             }
 
-            //Server connection function
+            //Server connection function (Will connect to current Spring webserver for pulling feedback data)
             if (listBox1.SelectedIndex.Equals(3))
             {
 
@@ -79,6 +82,7 @@ namespace Network_Tester
             //Progress Bar button(Place holder for now, future features will go here)
             if (listBox1.SelectedIndex.Equals(4))
             {
+
                 data.Textblock = "Executing Progress Bar Check.\n";
                 data.Textblock = "Starting long Task...\n";
 
@@ -105,10 +109,11 @@ namespace Network_Tester
             //Button to clear out text box
             private void ClearButton_Click(object sender, RoutedEventArgs e)
             {
-                textBlock.Text = "";
-                inputBox.Text = "";
+                data.reset();
+                inputBox.Text = String.Empty;
                 password.Clear();
                 ProgBar.Value = 0;
+                
             }
 
             //Methods for any event on click items in list.
@@ -136,6 +141,11 @@ namespace Network_Tester
                 set { _textBlock += value;
                     OnPropertyChanged("Textblock");
                 }
+            }
+            public void reset()
+            {
+                _textBlock = "";
+                OnPropertyChanged("Textblock");
             }
             public string Inputbox
             {
