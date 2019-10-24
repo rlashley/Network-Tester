@@ -19,7 +19,6 @@
         <ListBox Name="listBox1" SelectedIndex="13" Margin="10,10,632,10" Grid.ColumnSpan="2">
             <ListBoxItem Content="IPCheck"></ListBoxItem>
             <ListBoxItem Content="Create MD5 Hash"></ListBoxItem>
-            <ListBoxItem Content="Net Security Test"></ListBoxItem>
             <ListBoxItem Content="Access to Internet?"></ListBoxItem>
             <ListBoxItem Content="Server Connect"></ListBoxItem>
             <ListBoxItem Content="Progress Bar Button"></ListBoxItem>

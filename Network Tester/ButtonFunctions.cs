@@ -12,7 +12,7 @@ namespace Network_Tester
 {
     class ButtonFunctions
     {
-
+        //Constructor
         public ButtonFunctions()
         {
             

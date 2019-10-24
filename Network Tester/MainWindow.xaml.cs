@@ -34,13 +34,13 @@ namespace Network_Tester
             if (listBox1.SelectedIndex.Equals(0))
             {
 
-                ProgBar.IsIndeterminate = true;
-                data.Textblock = "Checking IP addresses...";
+                //ProgBar.IsIndeterminate = true;
+                data.Textblock = "Checking IP addresses...\n";
                 foreach (string s in buttonFunctions.IpCheck())
                 {
-                    data.Textblock = s;
+                    data.Textblock = s+"\n";
                 }
-                ProgBar.IsIndeterminate = false;
+                //ProgBar.IsIndeterminate = false;
 
             }
 
@@ -50,41 +50,41 @@ namespace Network_Tester
                 if (!inputBox.Text.Equals(""))
                 {
 
-                    ProgBar.IsIndeterminate = true;
+                    //ProgBar.IsIndeterminate = true;
                     data.Textblock = "Initializing Code, serializing input to 256bit encrypted hash.";
                     string pass = password.Password;
                     code = inputBox.Text;
                     data.Textblock = buttonFunctions.GenHash(code, pass);
-                    ProgBar.IsIndeterminate = false;
+                    //ProgBar.IsIndeterminate = false;
 
                 }
                 else
-                    data.Textblock = "The text box is empty. Please enter the information you would like to be encrypted.";
+                    data.Textblock = "The text box is empty. Please enter the information you would like to be encrypted.\n";
             }
 
             //Server connection function
-            if (listBox1.SelectedIndex.Equals(4))
+            if (listBox1.SelectedIndex.Equals(3))
             {
 
-                ProgBar.IsIndeterminate = true;
+                //ProgBar.IsIndeterminate = true;
                 List<int> openPorts = new List<int>();
                 openPorts = buttonFunctions.ServerConnect();
                 foreach (int port in openPorts)
                 {
                     data.Textblock = "Connection has been made on port " + port;
                 }
-                ProgBar.IsIndeterminate = false;
+                //ProgBar.IsIndeterminate = false;
             }
 
             //Progress Bar button(Place holder for now, future features will go here)
-            if (listBox1.SelectedIndex.Equals(5))
+            if (listBox1.SelectedIndex.Equals(4))
             {
-                data.Textblock = "Executing Progress Bar Check.";
-                data.Textblock = "Starting long Task...";
+                data.Textblock = "Executing Progress Bar Check.\n";
+                data.Textblock = "Starting long Task...\n";
 
                 Thread.Sleep(1000);
 
-                data.Textblock = "In Progress...";
+                data.Textblock = "In Progress...\n";
 
                 ProgBar.Value = 0;
 
@@ -108,6 +108,7 @@ namespace Network_Tester
                 textBlock.Text = "";
                 inputBox.Text = "";
                 password.Clear();
+                ProgBar.Value = 0;
             }
 
             //Methods for any event on click items in list.
